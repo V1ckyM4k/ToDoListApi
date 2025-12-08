@@ -4,6 +4,8 @@ Minimum System Requirements:
 Operating System - Windows 8.1, 10 or 11
 Application - Visual Studio 2022
             - WampServer64
+            - SQL Server Management Studio
+            - Postman (for testing the API)
 
 
 Minimum Hardware requirements:
@@ -28,12 +30,16 @@ RESOLUTION --> Video card that supports a minimum display resolution of 720p (12
 How To Run The Application:
 ****************************
 0. Download the application from the github repository: https://github.com/V1ckyM4k/ToDoListApi
-1.  (In File Explorer) Unzip the folder "ToDoListApi"
+1. (In File Explorer) Unzip the folder "ToDoListApi"
 2. Open Visual Studio 2022
 3. In Visual Studio, click on "Open a local folder" and find the project in the respected folder and open it
-4. Click on the highlighted play button with the project name at the top the application to debug and run the application
-5. You will be introduced with a main menu where there will three buttons to navigate to each part of the system. Click on the "Request" button, this will open the request form.
-6. in the request form you can search for requests, view all requests, retrieve the most urgent request, update the request status to "In Progress", and view the connection of each ward based on their postal code and connectivity.
+4. Configure values from the .env.example file from the repo in appsettings.json
+5. Open SQL Server Management Studio.
+6.  Create an empty database (e.g. TodoApi).
+7.  Open TodoApiDump.sql and execute it against that database.
+8.  Click on the highlighted play button with the project name at the top the application to debug and run the application
+9.  Navigate to: https://localhost:7083/swagger
+    - Use Swagger UI to: See all routes, View request/response schemas, and Test endpoints.
 
  ***********************************************
              Application Overview
@@ -49,24 +55,20 @@ It allows users to:
  ***********************************************
 ### Authentication: ###
 - /api/Auth/register
-  - POST
+  - POST : User enters their details to store their credentials in the db
 - /api/Auth/login
-  - POST
+  - POST : User enters their email and password and provides a jwt token which will e used to authorize them(copy the jwt into the authorize field on swagger)
 - /api/Auth/delete
-  - DELETE
+  - DELETE : User enters their email to delete their account
     
 ### ToDo: ###
 - /api/Tasks/task
-  - GET
-  - POST
-  - DELETE
+  - GET :  User enters task ID to retrieve a task from tasks table
+  - POST :  User enters task details to store a new task into the tasks table
+  - DELETE : User enters task ID to delete a task from tasks table
   
 - /api/Tasks/tasks
-  - GET
-  - POST
-     
-- /api/Tasks
-  - PUT
-  - DELETE
+  - GET : retrieves all the user's tasks 
+  - POST : allows users to import csv file of tasks
 
  
